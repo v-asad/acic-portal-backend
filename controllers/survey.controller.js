@@ -1,16 +1,16 @@
 // Package Imports
 
 // Local Imports
-const { UserService } = require("../services");
+const { SurveyService: Service } = require("../services");
 
 module.exports = class {
   // Get All
   static async getAll(_, res) {
-    const data = await UserService.getAll();
+    const data = await Service.getAll();
     if (data.error) {
       res.json({ success: false, message: "Request could not be processed." });
     } else {
-      res.json({ success: true, users: data.result });
+      res.json({ success: true, surveys: data.result });
     }
   }
 
@@ -19,11 +19,11 @@ module.exports = class {
     const { id } = req.params;
 
     if (id) {
-      const data = await UserService.getById(id);
+      const data = await Service.getById(id);
       if (data.error) {
         res.json({ success: false, message: "Not found." });
       } else {
-        res.json({ success: true, user: data.result });
+        res.json({ success: true, survey: data.result });
       }
     } else {
       res.json({ success: false, message: "Please provide an ID." });
@@ -36,14 +36,14 @@ module.exports = class {
 
     const id = new Date().getTime();
 
-    const data = await UserService.create({
+    const data = await Service.create({
       id,
       ...rest,
     });
     if (data.error) {
       res.json({ success: false, message: "Request could not be processed." });
     } else {
-      res.json({ success: true, user: data.result });
+      res.json({ success: true, survey: data.result });
     }
   }
 
@@ -54,7 +54,7 @@ module.exports = class {
     console.log(rest);
 
     if (id) {
-      const data = await UserService.update(id, { ...rest });
+      const data = await Service.update(id, { ...rest });
       if (data.error) {
         res.json({
           success: false,
@@ -73,7 +73,7 @@ module.exports = class {
     const { id } = req.params;
 
     if (id) {
-      const data = await UserService.delete(id);
+      const data = await Service.delete(id);
       if (data.error) {
         res.json({
           success: false,

@@ -2,8 +2,15 @@
 const Sequelize = require("sequelize");
 
 // Local Imports
-const { User } = require("./models");
 const dbConfig = require("./db.config");
+const {
+  User,
+  Survey,
+  SQuestion,
+  SQAnswer,
+  SResponse,
+  SRAnswer,
+} = require("./models");
 
 class Database {
   static db = {};
@@ -26,7 +33,13 @@ class Database {
     db.Sequelize = Sequelize;
     db.sequelize = sequelize;
 
+    // Embedding Schema in the db
     db.User = User(sequelize);
+    db.Survey = Survey(sequelize);
+    db.SQuestion = SQuestion(sequelize);
+    db.SQAnswer = SQAnswer(sequelize);
+    db.SResponse = SResponse(sequelize);
+    db.SRAnswer = SRAnswer(sequelize);
 
     db.sequelize
       .sync()

@@ -1,24 +1,18 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (db) =>
-  db.define("users", {
+  db.define("sq_answers", {
     id: {
       type: DataTypes.TEXT,
       primaryKey: true,
     },
-    email: {
+    squestion_id: {
       type: DataTypes.TEXT,
     },
-    password: {
+    title: {
       type: DataTypes.TEXT,
     },
-    name: {
-      type: DataTypes.TEXT,
-    },
-    role: {
-      type: DataTypes.TEXT,
-    },
-    gender: {
-      type: DataTypes.TEXT,
+    position: {
+      type: DataTypes.INTEGER,
     },
   });

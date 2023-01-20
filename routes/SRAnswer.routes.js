@@ -1,4 +1,4 @@
-const { UserController: Controller } = require("../controllers");
+const { SRAnswerController: Controller } = require("../controllers");
 
 const express = require("express");
 const router = express.Router();
