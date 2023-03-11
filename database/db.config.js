@@ -1,8 +1,8 @@
 module.exports = {
   HOST: "localhost",
-  USER: "me",
-  PASSWORD: "password",
-  DB: "acic_portal",
+  USER: "postgres",
+  PASSWORD: "acic-user",
+  DB: "acic_db",
   PORT: 5432,
   dialect: "postgres",
   pool: {

@@ -12,6 +12,33 @@ const {
   SRAnswer,
 } = require("./models");
 
+const defineRelations = (db) => {
+
+  // Relations for User
+  db.User.hasMany(db.Survey)
+  db.User.hasMany(db.SResponse)
+
+  // Relations for Survey
+  db.Survey.belongsTo(db.User)
+  db.Survey.hasMany(db.SQuestion)
+
+  // Relations for Survey Responses
+  db.SResponse.belongsTo(db.User)
+  db.SResponse.hasMany(db.SRAnswer)
+
+  // Relations for Survey Questions
+  db.SQuestion.belongsTo(db.Survey)
+  db.SQuestion.hasMany(db.SQAnswer)
+
+  // Relations for Survey Answers
+  db.SQAnswer.belongsTo(db.SQuestion)
+  db.SQAnswer.hasMany(db.SRAnswer)
+
+  // Relations for Survey Response Answers
+  db.SRAnswer.belongsTo(db.SQAnswer)
+  db.SRAnswer.belongsTo(db.SResponse)
+};
+
 class Database {
   static db = {};
   static connect() {
@@ -40,6 +67,8 @@ class Database {
     db.SQAnswer = SQAnswer(sequelize);
     db.SResponse = SResponse(sequelize);
     db.SRAnswer = SRAnswer(sequelize);
+
+    defineRelations(db);
 
     db.sequelize
       .sync()
